@@ -2,15 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:w_1/models/product_model.dart';
-import 'package:w_1/pages/components/category_list.dart';
 import 'package:w_1/utils/color.dart';
 
 class Products extends StatelessWidget {
   const Products({
     Key? key,
-    this.product,
+    required this.product,
   }) : super(key: key);
-  final Product? product;
+  final Product product;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,26 +28,24 @@ class Products extends StatelessWidget {
             ),
             Row(
               children: List.generate(
-                  product!.category.length,
+                  product.category.length,
                   (index) => Padding(
-                        padding: EdgeInsets.only(right: 4.0),
-                        child: Category(
-                          category: product!.category,
-                        ),
+                        padding: EdgeInsets.only(right: 10.0),
+                        child: categoryList(index),
                       )),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              product!.title,
+              product.title,
               style: TextStyle(
                   fontSize: 28,
                   color: Colors.white,
                   fontWeight: FontWeight.w600),
             ),
             Text(
-              product!.desc,
+              product.desc,
               style: TextStyle(
                 height: 1.3,
                 fontSize: 25,
@@ -56,6 +53,25 @@ class Products extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Container categoryList(int index) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.0,
+      ),
+      decoration: BoxDecoration(
+        color: kcateColor,
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Text(
+        product.category[index],
+        style: TextStyle(
+          fontSize: 20,
+          color: Colors.white,
         ),
       ),
     );
